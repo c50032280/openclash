@@ -1,0 +1,234 @@
+# ========================
+# 基本信息
+# ========================
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: info
+external-controller: '127.0.0.1:9090'
+dns:
+    enable: true
+    ipv6: false
+    default-nameserver: [223.5.5.5, 119.29.29.29]
+    fake-ip-range: 198.18.0.1/16
+    use-hosts: true
+    nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+    fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
+    fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
+# ========================
+# 节点信息（你的 vless 节点）
+# ========================
+proxies:
+  - name: 'V-01'
+    type: vless
+    server: v.573150.xyz
+    port: 29748
+    uuid: d63d37e1-2922-48fc-a748-cc3d554a06b2
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    reality-opts:
+      public-key: "R2gKMF0Tetlnesc1pPkZH9NaOeehw-f5_U9JKG_cLjU"
+      short-id: ""
+      fingerprint: "chrome"
+    client-fingerprint: "chrome"
+    servername: "www.icloud.com"
+
+  - name: 'V-02'
+    type: vless
+    server: v.573150.xyz
+    port: 57346
+    uuid: ac1efb2e-96ee-4116-c4b5-fa9f08e80686
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    reality-opts:
+      public-key: "qhTzYYIgBzDLNYR79oxftqdo1kzL-1_hGJKfqrOliCY"
+      short-id: ""
+      fingerprint: "chrome"
+    client-fingerprint: "chrome"
+    servername: "www.lovelive-anime.jp"
+
+  - name: '20250306'
+    type: vless
+    server: v2.573150.xyz
+    port: 12737
+    uuid: 9000ac47-6451-46c5-90ce-ed038df99d7b
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    reality-opts:
+      public-key: "Z3ZGnAOdKkzJ07gR_7_0k9_iTTFP6paDOrqx1rN2LU4"
+      short-id: ""
+      fingerprint: "chrome"
+    client-fingerprint: "chrome"
+    servername: "www.icloud.com"
+
+  - name: "V2-02"
+    type: vless
+    server: v2.573150.xyz
+    port: 56944
+    uuid: 1871462c-6e0f-40c6-92a0-eddba81403a2
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    reality-opts:
+      public-key: "9rx7JwMO-KRZZEM9TQBO19BOAmmGjJyjN86ll2J7uVc"
+      short-id: ""
+      fingerprint: "chrome"
+    client-fingerprint: "chrome"
+    servername: "www.cloudflare.com"
+
+  - name: "V2-03"
+    type: vless
+    server: v2.573150.xyz
+    port: 46259
+    uuid: f6c3c4e0-df6b-46b8-8d0f-6ab4de26aa63
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    reality-opts:
+      public-key: "Z3ZGnAOdKkzJ07gR_7_0k9_iTTFP6paDOrqx1rN2LU4"
+      short-id: ""
+      fingerprint: "chrome"
+    client-fingerprint: "chrome"
+    servername: "www.icloud.com"
+
+# ========================
+# 策略组
+# ========================
+proxy-groups:
+  - name: 🧠 Select
+    type: select
+    proxies:
+      - 🔰 Proxy
+      - DIRECT
+      - 🚀 Auto
+      - NETFLIX
+      - YOUTUBE
+      - GAME
+
+  - name: 🔰 Proxy
+    type: select
+    proxies:
+      - V-01
+      - V-02
+      - 20250306
+      - V2-02
+      - V2-03
+
+  - name: 🚀 Auto
+    type: url-test
+    proxies:
+      - V-01
+      - V-02
+      - 20250306
+      - V2-02
+      - V2-03
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: NETFLIX
+    type: select
+    proxies:
+      - 🔰 Proxy
+      - V-01
+      - V2-02
+
+  - name: YOUTUBE
+    type: select
+    proxies:
+      - 🔰 Proxy
+      - V2-03
+      - V-02
+
+  - name: GAME
+    type: select
+    proxies:
+      - 🔰 Proxy
+      - V-01
+      - V2-02
+
+# ========================
+# 规则锚点（模板）
+# ========================
+rule-anchor:
+  ip: &ip
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+
+  domain: &domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+
+  class: &class
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+
+# ========================
+# 规则订阅
+# ========================
+rule-providers:
+  private-domain: { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs }
+  private-ip:     { <<: *ip,     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/ipcidr/private.mrs }
+  cn:             { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs }
+  cn-ip:          { <<: *ip,     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/ipcidr/cn.mrs }
+  gfw:            { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs }
+  not-cn:         { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs }
+  netflix:        { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs }
+  youtube:        { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs }
+  disney:         { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs }
+  bilibili:       { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs }
+  steam:          { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs }
+  psn:            { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/psn.mrs }
+  epic:           { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epic.mrs }
+  telegram:       { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs }
+  github:         { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs }
+  apple:          { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs }
+  microsoft:      { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs }
+  speedtest:      { <<: *domain, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs }
+
+# ========================
+# 规则
+# ========================
+rules:
+# 1. 明确特例优先（比如你常用的特定域名）
+  - DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理
+  - DOMAIN-SUFFIX,oaiusercontent.com,🚀 默认代理
+  - DOMAIN-SUFFIX,synology.com,DIRECT
+  - DOMAIN-SUFFIX,synology.me,DIRECT
+  - DOMAIN-SUFFIX,myds.me,DIRECT
+  - DOMAIN-KEYWORD,synology,DIRECT
+  - DOMAIN-SUFFIX,52528800.xyz,DIRECT
+  
+  - RULE-SET,private-domain,DIRECT
+  - RULE-SET,private-ip,DIRECT
+  - RULE-SET,cn,DIRECT
+  - RULE-SET,cn-ip,DIRECT
+  - RULE-SET,bilibili,DIRECT
+  - RULE-SET,gfw,🔰 Proxy
+  - RULE-SET,not-cn,🔰 Proxy
+  - RULE-SET,netflix,NETFLIX
+  - RULE-SET,youtube,YOUTUBE
+  - RULE-SET,disney,NETFLIX
+  - RULE-SET,steam,GAME
+  - RULE-SET,epic,GAME
+  - RULE-SET,psn,GAME
+  - RULE-SET,telegram,🔰 Proxy
+  - RULE-SET,github,🔰 Proxy
+  - RULE-SET,microsoft,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,speedtest,DIRECT
+  - MATCH,🧠 Select
