@@ -1,9 +1,68 @@
 payload:
-  - DOMAIN-SUFFIX,chat.openai.com
-  - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,oaiusercontent.com
   - DOMAIN-SUFFIX,oaistatic.com
-  - DOMAIN-SUFFIX,auth0.com
   - DOMAIN-SUFFIX,copilot.microsoft.com
   - DOMAIN-KEYWORD,copilot
   - DOMAIN-SUFFIX,bing.com
+  # ===== 补充：应走代理的服务 =====
+
+  # OpenAI / ChatGPT
+  - DOMAIN-SUFFIX,openai.com,🔰 Proxy
+  - DOMAIN-SUFFIX,chatgpt.com,🔰 Proxy
+  - DOMAIN-SUFFIX,auth0.com,🔰 Proxy
+  - DOMAIN-KEYWORD,openai,🔰 Proxy
+
+  # AI 工具与图片生成
+  - DOMAIN-SUFFIX,midjourney.com,🔰 Proxy
+  - DOMAIN-SUFFIX,poe.com,🔰 Proxy
+  - DOMAIN-SUFFIX,claude.ai,🔰 Proxy
+  - DOMAIN-SUFFIX,perplexity.ai,🔰 Proxy
+  - DOMAIN-SUFFIX,gptzero.me,🔰 Proxy
+
+  # Google 系列（搜索、学术、翻译等）
+  - DOMAIN-SUFFIX,google.com,🔰 Proxy
+  - DOMAIN-SUFFIX,gstatic.com,🔰 Proxy
+  - DOMAIN-SUFFIX,googleapis.com,🔰 Proxy
+  - DOMAIN-SUFFIX,ggpht.com,🔰 Proxy
+  - DOMAIN-SUFFIX,gvt1.com,🔰 Proxy
+  - DOMAIN-SUFFIX,googlesource.com,🔰 Proxy
+  - DOMAIN-SUFFIX,translate.goog,🔰 Proxy
+
+  # YouTube 已有，你可以保留
+  # - DOMAIN-SUFFIX,youtube.com,🔰 Proxy
+
+  # 微软 Copilot / Dev 服务
+  - DOMAIN-SUFFIX,bing.com,🔰 Proxy
+  - DOMAIN-SUFFIX,copilot.microsoft.com,🔰 Proxy
+  - DOMAIN-SUFFIX,githubusercontent.com,🔰 Proxy
+  - DOMAIN-KEYWORD,visualstudio,🔰 Proxy
+
+  # Telegram（冗余兜底）
+  - DOMAIN-SUFFIX,t.me,🔰 Proxy
+  - DOMAIN-SUFFIX,tdesktop.com,🔰 Proxy
+
+  # X (Twitter) / Reddit
+  - DOMAIN-SUFFIX,twitter.com,🔰 Proxy
+  - DOMAIN-SUFFIX,x.com,🔰 Proxy
+  - DOMAIN-SUFFIX,twimg.com,🔰 Proxy
+  - DOMAIN-SUFFIX,reddit.com,🔰 Proxy
+
+  # 外媒新闻网站
+  - DOMAIN-SUFFIX,nytimes.com,🔰 Proxy
+  - DOMAIN-SUFFIX,bbc.com,🔰 Proxy
+  - DOMAIN-SUFFIX,cnn.com,🔰 Proxy
+  - DOMAIN-SUFFIX,voachinese.com,🔰 Proxy
+  - DOMAIN-SUFFIX,abc.net.au,🔰 Proxy
+
+  # 科研/教育常用（国际）
+  - DOMAIN-SUFFIX,arxiv.org,🔰 Proxy
+  - DOMAIN-SUFFIX,jstor.org,🔰 Proxy
+  - DOMAIN-SUFFIX,sciencedirect.com,🔰 Proxy
+  - DOMAIN-SUFFIX,springer.com,🔰 Proxy
+  - DOMAIN-SUFFIX,nature.com,🔰 Proxy
+
+  # 云服务商
+  - DOMAIN-SUFFIX,cloudflare.com,🔰 Proxy
+  - DOMAIN-SUFFIX,aws.amazon.com,🔰 Proxy
+  - DOMAIN-SUFFIX,azureedge.net,🔰 Proxy
+  - DOMAIN-SUFFIX,vercel.app,🔰 Proxy
