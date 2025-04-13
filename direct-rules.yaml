@@ -1,0 +1,9 @@
+payload:
+  - DOMAIN-SUFFIX,qq.com
+  - DOMAIN-SUFFIX,mi.com
+  - DOMAIN-SUFFIX,xiaomi.net
+  - DOMAIN-KEYWORD,alicdn
+  - DOMAIN-SUFFIX,baidu.com
+  - DOMAIN-SUFFIX,sinaimg.cn
+  - DOMAIN-SUFFIX,bilibili.com
+  - DOMAIN-SUFFIX,zhihu.com
