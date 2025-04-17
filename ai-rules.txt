@@ -1,0 +1,63 @@
+# === OpenAI / ChatGPT ===
+openai.com
+chat.openai.com
+auth0.com
+openaiapi-site.azureedge.net
+
+# === Anthropic Claude ===
+claude.ai
+api.anthropic.com
+
+# === Google Gemini / Bard ===
+gemini.google.com
+bard.google.com
+
+# === Microsoft Copilot / Azure AI ===
+copilot.microsoft.com
+copilot.microsoft365.com
+copilot.azure.com
+api.copilot.microsoft.com
+api.copilot.microsoft365.com
+
+# === Perplexity AI ===
+perplexity.ai
+
+# === Poe by Quora ===
+poe.com
+cdn.poe.com
+api.poe.com
+
+# === Hugging Face ===
+huggingface.co
+hf.space
+api-inference.huggingface.co
+
+# === xAI / Grok (X) ===
+x.ai
+grok.x.ai
+
+# === ChatPDF / AI PDF tools ===
+chatpdf.com
+askyourpdf.com
+
+# === Midjourney (部分功能需 AI 分流) ===
+midjourney.com
+api.midjourney.com
+
+# === Character AI ===
+character.ai
+
+# === Notion AI ===
+notion.so
+www.notion.so
+
+# === Writesonic / Chatsonic ===
+writesonic.com
+chatsonic.com
+
+# === Jasper AI ===
+jasper.ai
+
+# === Any other common AI-related platform ===
+you.com
+phind.com
