@@ -7,3 +7,4 @@
   - 'bilibili.com'
   - 'zhihu.com'
   - 'qichiyu.com'
+  - 'synology.com'
