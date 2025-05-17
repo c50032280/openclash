@@ -42,3 +42,4 @@
   - 'azureedge.net'
   - 'vercel.app'
   - 'sogi.com.tw'
+  - 'finchina.com'
